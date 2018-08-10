@@ -7,7 +7,6 @@ public class Main {
     public static String filePath= "src/main/java/input.txt";
     public static ArrayList<FolioTranscations> getInput(String filePath) throws FileNotFoundException {
         ArrayList<FolioTranscations> input = new ArrayList<>();
-        ArrayList<FolioRow> transactions = new ArrayList<>();
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
         boolean isEND= false;
@@ -16,11 +15,13 @@ public class Main {
             if(name.equals("END")){
                 isEND= true;
             }else {
+                ArrayList<FolioRow> transactions = new ArrayList<>();
                 boolean isZero= false;
-                while (isZero) {
+                while (!isZero) {
                     String start = scanner.next();
                     if (start.equals("0")) {
                         isZero = true;
+                        scanner.nextLine();
                     }else{
                         String end = scanner.next();
                         String status = scanner.next();
@@ -43,6 +44,7 @@ public class Main {
             ArrayList<FolioTranscations> input=getInput(filePath);
             for (FolioTranscations folioTranscations: input){
                 folioTranscations.PrintFolioTransaction();
+                System.out.println();
             }
 
         } catch (FileNotFoundException e) {
